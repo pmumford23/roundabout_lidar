@@ -1,0 +1,56 @@
+Guidelines to using the software.
+=================================
+Peter Mumford UNSW, 2020
+
+
+This code uses the following packages:
+
+FileIO
+LasIO
+LinearAlgebra
+Printf
+Statistics
+LinearAlgebra
+
+
+Open a Julia REPL
+
+cd to the directory containing the source code.
+julia>;
+shell>cd path\\to\\directory
+
+Call main on the Julia passing three arguments;
+1: pathway_to_directory to store output from processing
+2: pathway_and_filename of a text file with details of what to process (more about this later...)
+3: filename for output text
+
+julia>include("process_main.jl")
+
+julia>main("path\\to\\directory","infileName.txt","outfileName.txt")
+
+This will work through every line entry in the infile and process the LAS file containing a roundabout with known radius and Easting/Northing center coordinates.
+
+Plots and LAS file output of detected roundabout circumferences will be generated into the provided directory.
+A text report is generated with the results including calculated radius, center coordinates and offset from the surveyed coordinates.
+
+Surveyed Coordinates and LAS file coordinates must be in UTM Eastings and Northings.
+Radius is in meters.
+
+Here is a few lines from an input file:
+----------------------------------------------------
+
+date,refname,filename,easting,northing,radius,winsize
+170323,"DeeWhy_1","F:\roundabout_LiDAR\DeeWhy_LongReef_170323.las",342226.387,6263588.731,5.2,8
+170523,"DeeWhy_1","F:\roundabout_LiDAR\DeeWhy_LongReef_170523.las",342226.387,6263588.731,5.2,6
+170822,"DeeWhy_1","F:\roundabout_LiDAR\DeeWhy_LongReef_170822.las",342226.387,6263588.731,5.2,8
+171121,"DeeWhy_1","F:\roundabout_LiDAR\DeeWhy_LongReef_171121.las",342226.387,6263588.731,5.2,6
+180118,"DeeWhy_1","F:\roundabout_LiDAR\LongReef_DeeWhy_180118.las",342226.387,6263588.731,5.2,3
+
+-----------------------------------------------------
+
+The first line provides the table column titles. This must be on the first line.
+Following is one or more lines of input data to process.
+Date, reference name (can be any string), path_and_file_name_of_LAS, surveyed center Easting, center Northing, radius, moving average window size (3 to 8 work OK, start with 6).
+Do not leave any empty lines.
+
+Three methods are used to estimate the roundabout center in the point cloud.
