@@ -1,3 +1,11 @@
+# roundabout_lidar
+# Software for horizontal accuracy in airborne LiDAR data
+#
+# Peter Mumford  2020
+# ------------------------------------------------------------
+# School of Aviation, University of New South Wales, Australia
+# ------------------------------------------------------------
+#
 
 # gradiant circumference
 
